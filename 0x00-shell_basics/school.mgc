@@ -1,3 +1,1 @@
-#!/bin/bash
-set file_type = "file -m school.mgc example_file"
-echo $file_type
+echo -n "abc123" >school.mgc
