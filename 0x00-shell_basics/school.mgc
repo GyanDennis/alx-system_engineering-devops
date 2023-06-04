@@ -1,1 +1,1 @@
-echo -n "abc123" >school.mgc
+echo -n "abc123" > school_mgc
