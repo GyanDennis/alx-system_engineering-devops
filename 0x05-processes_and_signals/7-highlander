@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+###########################################################
+# Script: to_infinity_and_beyond.sh
+# Description: Displays "To infinity and beyond indefinitely"
+#              with a sleep of 2 seconds between each iteration.
+#              It shows "I am invincible!!!" when receiving
+#              a SIGTERM signal.
+# Author: GyanDennis
+# Date: July 30, 2023
+###########################################################
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+    trap 'echo "I am invincible!!!"' SIGTERM
+done

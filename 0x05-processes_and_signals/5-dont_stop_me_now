@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Use kill rather than ctrl+c to stop 4-to_infinity_and_beyond
+# infinity and beyond indefinitely infinity loop
+kill "$(pgrep -f 4-to_infinity_and_beyond)"
