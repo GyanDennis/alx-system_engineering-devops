@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
+<<<<<<< HEAD
 # server-01 login
+=======
+#Log8n to server-01
+>>>>>>> 4feb37f5f7b09e3fb4806d86454da31945758201
 
 eval $("ssh-agent")
 
