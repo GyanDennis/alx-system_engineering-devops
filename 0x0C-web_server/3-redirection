@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Redirection
+apt-get -y update
+apt-get -y install nginx
+echo "Hello World!" > /var/www/html/index.html
+
+# Use double quotes around the sed command and use a different delimiter
+sed -i "/server_name _;/a \\\trewrite ^/redirect_me http://www.github.com permanent;" /etc/nginx/sites-available/default
+
+# Start Nginx service
+service nginx start
