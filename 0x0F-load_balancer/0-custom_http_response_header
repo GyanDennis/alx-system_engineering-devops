@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# Install Nginx
+apt-get update -y
+apt-get install nginx -y
+
+# Create a custom 404 error page
+echo "Ceci n'est pas une page" > /var/www/html/custom_404.html
+
+# Configure Nginx to include a custom header and use the custom error page
+cat <<EOF > /etc/nginx/sites-available/custom-config
+server {
+    listen 80 default_server;
+    server_name _;
+
+    location / {
+        add_header X-Served-By \$hostname;
+        error_page 404 /custom_404.html;
+        return 301 \$scheme://www.google.com;
+    }
+
+    # Include additional server configuration if needed
+}
+EOF
+
+# Enable the custom configuration
+ln -s /etc/nginx/sites-available/custom-config /etc/nginx/sites-enabled/
+
+# Test Nginx configuration and restart
+nginx -t && service nginx restart
+
+# Create a simple "Hello World!" index.html
+echo "Hello World!" > /usr/share/nginx/html/index.html
