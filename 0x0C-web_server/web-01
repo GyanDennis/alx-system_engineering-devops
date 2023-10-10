@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# login to server 01
+# login to server web-01
+#login to domain name "gyanstudio.tech"
 
 eval $("ssh-agent")
 
