@@ -5,5 +5,5 @@ file { 'config':
   ensure  => present,
   owner   => 'root',
   path    => '/etc/ssh/ssh_config',
-  content    => 'IdentityFile ~/.ssh/school\n PasswordAuthentication no\n User ubuntu\n Host 34.201.61.244\n',
+  content    => 'IdentityFile ~/.ssh/school\n PasswordAuthentication no\n User ubuntu\n Host 54.85.105.228\n',
 }

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script to connect to the loadbalancer server through a private key
+
+ssh ubuntu@100.25.12.6 -i ~/.ssh/school

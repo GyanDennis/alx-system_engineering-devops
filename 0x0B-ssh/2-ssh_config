@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Set up client configuration file
 
-Host 34.201.61.244
+Host 54.85.105.228
 User ubuntu
 IdentityFile ~/.ssh/school
 PasswordAuthentication no
