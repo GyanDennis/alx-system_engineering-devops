@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-  2
-  3 # server-01 login
-  4
-  5 #Login to server-01
-  6
-  7 eval $("ssh-agent")
-  8
-  9 ssh-add ~/.ssh/school
- 10
- 11 ssh ubuntu@52.86.186.195
+
+# server-01 login
+
+#Login to server-01
+
+eval $("ssh-agent")
+
+ssh-add ~/.ssh/school
+
+ssh ubuntu@52.86.186.195
