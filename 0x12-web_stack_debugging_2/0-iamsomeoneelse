@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Preventing hackers from getting root access
+# Script to run whoami command under the user passed as argument.
+sudo -u "$1" whoami
