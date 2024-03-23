@@ -1,12 +1,24 @@
-#!/usr/bin/python3
-"""
-1-main
-"""
+#!/usr/bin/env python3
+
+import requests
 import sys
 
-if __name__ == '__main__':
-    top_ten = __import__('1-top_ten').top_ten
-    if len(sys.argv) < 2:
+def fetch_posts(subreddit):
+    url = f"https://www.reddit.com/r/{subreddit}/.json"
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers)
+    response.raise_for_status()
+    data = response.json()
+    posts = set()  # Using a set to store unique posts
+    for post in data['data']['children']:
+        posts.add(post['data']['title'])
+    return posts
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
         print("Please pass an argument for the subreddit to search.")
-    else:
-        top_ten(sys.argv[1])
+        sys.exit(1)
+    subreddit = sys.argv[1]
+    posts = fetch_posts(subreddit)
+    for post in posts:
+        print(post)
