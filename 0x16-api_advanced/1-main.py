@@ -3,22 +3,20 @@
 import requests
 import sys
 
-def fetch_posts(subreddit):
-    url = f"https://www.reddit.com/r/{subreddit}/.json"
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    response = requests.get(url, headers=headers)
-    response.raise_for_status()
-    data = response.json()
-    posts = set()  # Using a set to store unique posts
-    for post in data['data']['children']:
-        posts.add(post['data']['title'])
-    return posts
+def fetch_top_ten(subreddit):
+    url = f"https://www.reddit.com/r/{subreddit}/hot/.json?limit=10"
+    headers = {'User-Agent': 'MyBot/1.0'}  # Provide a proper User-Agent header
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        data = response.json()
+        for post in data['data']['children']:
+            print(post['data']['title'])
+    except requests.exceptions.HTTPError as err:
+        print(f"An error occurred: {err}")
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Please pass an argument for the subreddit to search.")
-        sys.exit(1)
-    subreddit = sys.argv[1]
-    posts = fetch_posts(subreddit)
-    for post in posts:
-        print(post)
+    else:
+        fetch_top_ten(sys.argv[1])
