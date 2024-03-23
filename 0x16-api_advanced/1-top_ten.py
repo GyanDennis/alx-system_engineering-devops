@@ -1,37 +1,44 @@
 #!/usr/bin/python3
+
 """
-Script to print hot posts on a given Reddit subreddit.
+prints the titles of the first 10 hot posts listed for a given subreddit
 """
 
 import requests
 
 
 def top_ten(subreddit):
-    """Print the titles of the 10 hottest posts on a given subreddit."""
-    # Construct the URL for the subreddit's hot posts in JSON format
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
+    """
+    function that queries the Reddit API and prints the titles of the first
+    10 hot posts listed for a given subreddit
+    """
 
-    # Define headers for the HTTP request, including User-Agent
-    headers = {
-        "User-Agent": "linux:0x16.api.advanced:v1.0.0 (by /u/bdov_)"
-    }
-
-    # Define parameters for the request, limiting the number of posts to 10
-    params = {
-        "limit": 10
-    }
-
-    # Send a GET request to the subreddit's hot posts page
-    response = requests.get(url, headers=headers, params=params,
-                            allow_redirects=False)
-
-    # Check if the response status code indicates a not-found error (404)
-    if response.status_code == 404:
-        print("None")
+    if subreddit is None or not isinstance(subreddit, str):
+        print("Invalid subreddit name.")
         return
 
-    # Parse the JSON response and extract the 'data' section
-    results = response.json().get("data")
+    user_agent = {
+        'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36'
+    }
+    params = {'limit': 10}
+    url = f"https://www.reddit.com/r/{subreddit}/hot/.json"
 
-    # Print the titles of the top 10 hottest posts
-    [print(c.get("data").get("title")) for c in results.get("children")]
+    try:
+        response = requests.get(url, headers=user_agent, params=params)
+        response.raise_for_status()  # Raise an exception for any HTTP errors
+
+        data = response.json()
+        posts = data['data']['children']
+
+        for post in posts:
+            title = post['data']['title']
+            print(title)
+
+    except requests.exceptions.RequestException as e:
+        print(f"An error occurred: {e}")
+    except (KeyError, ValueError) as e:
+        print(f"Failed to parse the response: {e}")
+
+
+# Example usage
+top_ten('programming')
