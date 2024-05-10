@@ -1,11 +1,8 @@
-#!/usr/bin/python3
-"""Querying Reddit"""
-
 import requests
 
 def number_of_subscribers(subreddit):
-    """Query a subreddit and retrieve the number of subscribers"""
-
+    """Query the Reddit API and return the number of subscribers for a given subreddit"""
+    
     # Reddit API endpoint for getting subreddit information
     url = f"https://www.reddit.com/r/{subreddit}/about.json"
     print("API URL:", url)
@@ -24,9 +21,5 @@ def number_of_subscribers(subreddit):
         sub_count = data.get('subscribers', 0)
         return sub_count
     else:
-        print("Request failed.")
+        # Invalid subreddit or other error, return 0
         return 0
-
-# Example usage:
-subreddit_name = "python"
-print(f"Number of subscribers in r/{subreddit_name}: {number_of_subscribers(subreddit_name)}")
